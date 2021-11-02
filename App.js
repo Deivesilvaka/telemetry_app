@@ -47,7 +47,8 @@ export default function App() {
           <Text style={styles.btnText}>Conectar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.btnStop} onPress={() => {
+        <TouchableOpacity style={styles.btnStop} onPress={async () => {
+          await socket.emit('flightFinished', 1)
           Restart()
         }}>
           <Text style={styles.btnText}>Parar telemetria</Text>
