@@ -14,6 +14,7 @@ export default function Telemetry({socket}) {
     const [oX, setOX] = useState(0)
     const [oY, setOY] = useState(0)
     const [oZ, setOZ] = useState(0)
+    const updateTelemetry = 300
 
     const telemetryChunk = {
         rocketOrientation: {
@@ -31,14 +32,14 @@ export default function Telemetry({socket}) {
     const [subscription, setSubscription] = useState(null)
 
     const _setVelocity = () => {
-        Accelerometer.setUpdateInterval(100)
-        Gyroscope.setUpdateInterval(100)
+        Accelerometer.setUpdateInterval(updateTelemetry)
+        Gyroscope.setUpdateInterval(updateTelemetry)
     }
 
     const sendTelemetry = () => {
         setInterval(() => {
             socket.emit("teleData", telemetryChunk)
-        }, 100);
+        }, updateTelemetry);
     }
 
     const _subscribe = () => {
